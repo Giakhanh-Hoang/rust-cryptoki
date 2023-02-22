@@ -1,3 +1,13 @@
+# Cryptoki Rust Wrapper, sgal Edit
+
+An edited copy of the Rust [cryptoki crate](https://crates.io/crates/cryptoki). Based on the [cd497d6 commit](https://github.com/parallaxsecond/rust-cryptoki/commit/cd497d607bd98c56e58a91da9b160322f814431d).
+
+Adds unit test-less support for `AES_GCM`, `GENERIC_SECRET_KEY_GEN`, `SHA HMAC`, `AES_KEY_WRAP_THALES` mechanisms. [Thales](https://cpl.thalesgroup.com/) has their own defined Key Wrap mechanism which is compatible with PKCS11 standard mechanism `AES_KEY_WRAP`. Its mechanism code is `0x80000170` with no parameters.
+
+Branch name is knowingly mis-named after the (current) latest [cryptoki](https://crates.io/crates/cryptoki) version (v0.4.1) so I can somewhat leverage certain automated dependency vulnerability scanners in a strict manner while also using functionality from [parallaxsecond/rust-cryptoki PR #111](https://github.com/parallaxsecond/rust-cryptoki/pull/111). This is not ideal, so I eagerly await a new version 🍽️
+
+<br>
+
 # Cryptoki Rust Wrapper
 
 The `cryptoki` crate provides an idiomatic interface to the PKCS #11 API.
