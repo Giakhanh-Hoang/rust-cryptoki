@@ -637,34 +637,8 @@ impl TryFrom<CK_MECHANISM_TYPE> for MechanismType {
 
     fn try_from(mechanism_type: CK_MECHANISM_TYPE) -> Result<Self, Self::Error> {
         match mechanism_type {
-            CKM_AES_GCM => Ok(MechanismType::AES_GCM),
-            CKM_GENERIC_SECRET_KEY_GEN => Ok(MechanismType::AES_GCM),
-            CKM_SHA_1_HMAC => Ok(MechanismType::SHA_1_HMAC),
-            CKM_SHA256_HMAC  => Ok(MechanismType::SHA256_HMAC),
-            CKM_SHA384_HMAC  => Ok(MechanismType::SHA384_HMAC),
-            CKM_SHA512_HMAC => Ok(MechanismType::SHA512_HMAC),
-            CKM_AES_KEY_GEN => Ok(MechanismType::AES_KEY_GEN),
-            CKM_RSA_PKCS_KEY_PAIR_GEN => Ok(MechanismType::RSA_PKCS_KEY_PAIR_GEN),
-            CKM_RSA_PKCS => Ok(MechanismType::RSA_PKCS),
-            CKM_RSA_PKCS_PSS => Ok(MechanismType::RSA_PKCS_PSS),
-            CKM_RSA_PKCS_OAEP => Ok(MechanismType::RSA_PKCS_OAEP),
-            CKM_SHA_1 => Ok(MechanismType::SHA1),
-            CKM_SHA256 => Ok(MechanismType::SHA256),
-            CKM_SHA384 => Ok(MechanismType::SHA384),
-            CKM_SHA512 => Ok(MechanismType::SHA512),
-            CKM_DES3_KEY_GEN => Ok(MechanismType::DES3_KEY_GEN),
-            CKM_DES3_ECB => Ok(MechanismType::DES3_ECB),
-            CKM_EC_KEY_PAIR_GEN => Ok(MechanismType::ECC_KEY_PAIR_GEN),
-            CKM_EC_EDWARDS_KEY_PAIR_GEN => Ok(MechanismType::ECC_EDWARDS_KEY_PAIR_GEN),
-            CKM_EC_MONTGOMERY_KEY_PAIR_GEN => Ok(MechanismType::ECC_MONTGOMERY_KEY_PAIR_GEN),
-            CKM_ECDH1_DERIVE => Ok(MechanismType::ECDH1_DERIVE),
-            CKM_ECDSA => Ok(MechanismType::ECDSA),
-            CKM_SHA256_RSA_PKCS => Ok(MechanismType::SHA256_RSA_PKCS),
-            CKM_SHA384_RSA_PKCS => Ok(MechanismType::SHA384_RSA_PKCS),
-            CKM_SHA512_RSA_PKCS => Ok(MechanismType::SHA512_RSA_PKCS),
             other => {
-                error!("Mechanism type {} is not supported.", other);
-                Err(Error::NotSupported)
+                Ok(MechanismType { val: mechanism_type })
             }
         }
     }
