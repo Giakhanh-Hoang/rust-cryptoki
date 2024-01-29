@@ -685,6 +685,8 @@ pub enum Mechanism<'a> {
     AesGcm(CK_GCM_PARAMS),
     /// AES KEY WRAP, Thales mechanism
     AesKeyWrapThales,
+    /// AES KEY WRAP PAD, Thales mechanism
+    AesKeyWrapPadThales,
     /// GENERIC SECRET
     GenericSecretKeyGen,
     /// SHA_1_HMAC
