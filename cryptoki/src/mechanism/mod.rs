@@ -937,6 +937,7 @@ impl From<&Mechanism<'_>> for CK_MECHANISM {
             // Mechanisms without parameters
             Mechanism::AesKeyGen
             | Mechanism::AesKeyWrapThales
+            | Mechanism::AesKeyWrapPadThales
             | Mechanism::GenericSecretKeyGen
             | Mechanism::Sha1Hmac
             | Mechanism::Sha256Hmac
