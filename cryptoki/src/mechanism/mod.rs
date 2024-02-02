@@ -32,7 +32,7 @@ pub const CKM_AES_KEY_WRAP_THALES: CK_MECHANISM_TYPE = 0x80000170;
 
 /// Thales has their own defined Key Wrap mechanism which is compatible with PKCS11 standard mechanism AES_KEY_WRAP_PAD
 /// mechanism code is 0x80000171 with no parameters 
-pub const CKM_AES_KEY_WRAP_PAD_THALES: CK_MECHANISM_TYPE = 0x80000170;
+pub const CKM_AES_KEY_WRAP_PAD_THALES: CK_MECHANISM_TYPE = 0x80000171;
 
 impl MechanismType {
     /// AES GCM mechanism
