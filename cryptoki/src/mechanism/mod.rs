@@ -30,11 +30,17 @@ pub struct MechanismType {
 /// mechanism code is 0x80000170 with no parameters 
 pub const CKM_AES_KEY_WRAP_THALES: CK_MECHANISM_TYPE = 0x80000170;
 
+/// Thales has their own defined Key Wrap mechanism which is compatible with PKCS11 standard mechanism AES_KEY_WRAP_PAD
+/// mechanism code is 0x80000171 with no parameters 
+pub const CKM_AES_KEY_WRAP_PAD_THALES: CK_MECHANISM_TYPE = 0x80000171;
+
 impl MechanismType {
     /// AES GCM mechanism
     pub const AES_GCM: MechanismType = MechanismType { val: CKM_AES_GCM };
     /// AES KEY WRAP, Thales mechanism
     pub const AES_KEY_WRAP_THALES: MechanismType = MechanismType { val: CKM_AES_KEY_WRAP_THALES };
+    /// AES KEY WRAP PAD, Thales mechanism
+    pub const AES_KEY_WRAP_PAD_THALES: MechanismType = MechanismType { val: CKM_AES_KEY_WRAP_PAD_THALES };
     /// GENERIC SECRET mechanism
     pub const GENERIC_SECRET_KEY_GEN: MechanismType = MechanismType { val: CKM_GENERIC_SECRET_KEY_GEN };
     /// SHA_1_HMAC mechanism
@@ -254,6 +260,7 @@ impl MechanismType {
     pub(crate) fn stringify(mech: CK_MECHANISM_TYPE) -> String {
         match mech {
             CKM_AES_KEY_WRAP_THALES => String::from(stringify!(CKM_AES_KEY_WRAP_THALES)),
+            CKM_AES_KEY_WRAP_PAD_THALES => String::from(stringify!(CKM_AES_KEY_WRAP_PAD_THALES)),
             CKM_RSA_PKCS_KEY_PAIR_GEN => String::from(stringify!(CKM_RSA_PKCS_KEY_PAIR_GEN)),
             CKM_RSA_PKCS => String::from(stringify!(CKM_RSA_PKCS)),
             CKM_RSA_9796 => String::from(stringify!(CKM_RSA_9796)),
@@ -678,6 +685,8 @@ pub enum Mechanism<'a> {
     AesGcm(CK_GCM_PARAMS),
     /// AES KEY WRAP, Thales mechanism
     AesKeyWrapThales,
+    /// AES KEY WRAP PAD, Thales mechanism
+    AesKeyWrapPadThales,
     /// GENERIC SECRET
     GenericSecretKeyGen,
     /// SHA_1_HMAC
@@ -844,6 +853,7 @@ impl Mechanism<'_> {
         match self {
             Mechanism::AesGcm(_) => MechanismType::AES_GCM,
             Mechanism::AesKeyWrapThales => MechanismType::AES_KEY_WRAP_THALES,
+            Mechanism::AesKeyWrapPadThales => MechanismType::AES_KEY_WRAP_PAD_THALES,
             Mechanism::GenericSecretKeyGen => MechanismType::GENERIC_SECRET_KEY_GEN,
             Mechanism::Sha1Hmac => MechanismType::SHA_1_HMAC,
             Mechanism::Sha256Hmac  => MechanismType::SHA256_HMAC,
@@ -927,6 +937,7 @@ impl From<&Mechanism<'_>> for CK_MECHANISM {
             // Mechanisms without parameters
             Mechanism::AesKeyGen
             | Mechanism::AesKeyWrapThales
+            | Mechanism::AesKeyWrapPadThales
             | Mechanism::GenericSecretKeyGen
             | Mechanism::Sha1Hmac
             | Mechanism::Sha256Hmac
