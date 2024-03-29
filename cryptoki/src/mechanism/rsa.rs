@@ -19,8 +19,11 @@ use std::ops::Deref;
 pub struct PkcsMgfType {
     val: CK_RSA_PKCS_MGF_TYPE,
 }
+const CKG_MGF1_DEFAULT: CK_RSA_PKCS_MGF_TYPE = 0;
 
 impl PkcsMgfType {
+    /// MGF1 Defaults to firmwares default engine. Generally SHA-1
+    pub const MGF1_DEFAULT: PkcsMgfType = PkcsMgfType { val: CKG_MGF1_DEFAULT };
     /// MGF1 SHA-1
     pub const MGF1_SHA1: PkcsMgfType = PkcsMgfType { val: CKG_MGF1_SHA1 };
     /// MGF1 SHA-224
@@ -60,6 +63,7 @@ impl TryFrom<CK_RSA_PKCS_MGF_TYPE> for PkcsMgfType {
 
     fn try_from(mgf_type: CK_RSA_PKCS_MGF_TYPE) -> Result<Self> {
         match mgf_type {
+            CKG_MGF1_DEFAULT => Ok(PkcsMgfType::MGF1_DEFAULT),
             CKG_MGF1_SHA1 => Ok(PkcsMgfType::MGF1_SHA1),
             CKG_MGF1_SHA224 => Ok(PkcsMgfType::MGF1_SHA224),
             CKG_MGF1_SHA256 => Ok(PkcsMgfType::MGF1_SHA256),
