@@ -950,6 +950,7 @@ typedef struct ck_otp_signature_info
   unsigned long count;
 } ck_otp_signature_info;
 
+#define CKG_MGF1_DEFAULT 0x00000000UL
 #define CKG_MGF1_SHA1 0x00000001UL
 #define CKG_MGF1_SHA224 0x00000005UL
 #define CKG_MGF1_SHA256 0x00000002UL
